@@ -1,18 +1,19 @@
 import { Router } from 'express';
+import Correspondence from '../models/Correspondence';
 
 const correspondencesRouter = Router();
 
-const correspondences = [];
+const correspondences: Correspondence[] = [];
 
 correspondencesRouter.post('/', (request, response) => {
   const { id, recipientName, objectNumber, status } = request.body;
 
-  const correspondence = {
+  const correspondence = new Correspondence(
     id,
     recipientName,
     objectNumber,
-    status,
-  };
+    status
+  );
 
   correspondences.push(correspondence);
 
