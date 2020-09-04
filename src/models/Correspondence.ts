@@ -1,23 +1,33 @@
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+
+@Entity('correspondences')
 class Correspondence {
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
-  recipientName: string;
+  @Column()
+  recipient_name: string;
 
-  objectNumber: string;
+  @Column()
+  recipient_id: number;
 
+  @Column()
+  object_number: string;
+
+  @Column()
   status: string;
 
-  constructor(
-    id: number,
-    recipientName: string,
-    objectNumber: string,
-    status: string
-  ) {
-    this.id = id;
-    this.recipientName = recipientName;
-    this.objectNumber = objectNumber;
-    this.status = status;
-  }
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
 
 export default Correspondence;
