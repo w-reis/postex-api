@@ -16,6 +16,7 @@ export default class CreateCorrespondences1599174312445
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
             generationStrategy: 'increment',
           },
 

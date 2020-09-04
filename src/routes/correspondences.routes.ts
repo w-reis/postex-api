@@ -1,23 +1,37 @@
 import { Router } from 'express';
-import Correspondence from '../models/Correspondence';
+import { getCustomRepository } from 'typeorm';
+
+import CreateCorrespondenceService from '../services/CreateCorrespondenceService';
+import CorrespondencesRepository from '../repositories/CorrespondencesRepository';
 
 const correspondencesRouter = Router();
 
-const correspondences: Correspondence[] = [];
-
-correspondencesRouter.post('/', (request, response) => {
-  const { id, recipientName, objectNumber, status } = request.body;
-
-  const correspondence = new Correspondence(
-    id,
-    recipientName,
-    objectNumber,
-    status
+correspondencesRouter.get('/', async (request, response) => {
+  const correspondencesRepository = getCustomRepository(
+    CorrespondencesRepository
   );
+  const correspondences = await correspondencesRepository.find();
 
-  correspondences.push(correspondence);
+  return response.json(correspondences);
+});
 
-  return response.json(correspondence);
+correspondencesRouter.post('/', async (request, response) => {
+  try {
+    const { recipient_name, recipient_id, object_number } = request.body;
+
+    const createCorrespondence = new CreateCorrespondenceService();
+
+    const correspondence = await createCorrespondence.execute({
+      recipient_name,
+      recipient_id,
+      object_number,
+      status: 'pendente',
+    });
+
+    return response.json(correspondence);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
 });
 
 export default correspondencesRouter;
