@@ -9,7 +9,7 @@ interface Request {
   status: string;
 }
 
-class CreateAppointmentService {
+class CreateCorrespondenceService {
   public async execute({
     recipient_name,
     recipient_id,
@@ -26,8 +26,10 @@ class CreateAppointmentService {
       status,
     });
 
+    await correspondencesRepository.save(correspondence);
+
     return correspondence;
   }
 }
 
-export default CreateAppointmentService;
+export default CreateCorrespondenceService;
