@@ -6,7 +6,6 @@ interface Request {
   recipient_name: string;
   recipient_id: number;
   object_number: string;
-  status: string;
 }
 
 class CreateCorrespondenceService {
@@ -14,7 +13,6 @@ class CreateCorrespondenceService {
     recipient_name,
     recipient_id,
     object_number,
-    status,
   }: Request): Promise<Correspondence> {
     const correspondencesRepository = getCustomRepository(
       CorrespondencesRepository
@@ -23,7 +21,6 @@ class CreateCorrespondenceService {
       recipient_name,
       recipient_id,
       object_number,
-      status,
     });
 
     await correspondencesRepository.save(correspondence);

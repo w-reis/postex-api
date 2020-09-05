@@ -25,7 +25,6 @@ correspondencesRouter.post('/', async (request, response) => {
       recipient_name,
       recipient_id,
       object_number,
-      status: 'pendente',
     });
 
     return response.json(correspondence);
