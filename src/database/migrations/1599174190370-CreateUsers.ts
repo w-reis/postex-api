@@ -10,6 +10,7 @@ export default class CreateUsers1599174190370 implements MigrationInterface {
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
             generationStrategy: 'increment',
           },
 
