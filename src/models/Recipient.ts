@@ -36,6 +36,9 @@ class Recipient {
   city: string;
 
   @Column()
+  state: string;
+
+  @Column()
   CEP: string;
 
   @CreateDateColumn()
