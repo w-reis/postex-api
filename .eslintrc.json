@@ -16,7 +16,12 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "camelcase":"warn",
+    "@typescript-eslint/camelcase":"warn",
+    "@typescript-eslint/no-unused-vars": [
+      "error", {
+        "argsIgnorePattern": "_"
+      }
+    ],
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
     "import/extensions": [
