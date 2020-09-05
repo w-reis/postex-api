@@ -17,12 +17,12 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
       status: 'error',
       message: err.message,
     });
-
-    return response.status(500).json({
-      status: 'erros',
-      message: 'Internal server error.',
-    });
   }
+
+  return response.status(500).json({
+    status: 'erros',
+    message: 'Internal server error.',
+  });
 });
 
 app.listen(3333, () => {
