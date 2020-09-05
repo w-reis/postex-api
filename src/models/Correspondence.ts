@@ -4,7 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+
+import Recipient from './Recipient';
 
 @Entity('correspondences')
 class Correspondence {
@@ -16,6 +20,10 @@ class Correspondence {
 
   @Column()
   recipient_id: number;
+
+  @ManyToOne(() => Recipient)
+  @JoinColumn({ name: 'recipient_id ' })
+  recipient: Recipient;
 
   @Column()
   object_number: string;
