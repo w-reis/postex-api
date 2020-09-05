@@ -16,7 +16,7 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "@typescript-eslint/camelcase":"warn",
+    "camelcase":"off",
     "@typescript-eslint/no-unused-vars": [
       "error", {
         "argsIgnorePattern": "_"
