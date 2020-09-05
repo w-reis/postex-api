@@ -40,7 +40,6 @@ export default class CreateCorrespondences1599174312445
             name: 'status',
             type: 'varchar',
             isNullable: false,
-            default: 'pendente',
           },
           {
             name: 'created_at',
