@@ -5,8 +5,8 @@ import Correspondence from '../models/Correspondence';
 class CorrespondencesRepository extends Repository<Correspondence> {
   public async findByRecipientName(
     name: string
-  ): Promise<Correspondence | null> {
-    const findCorrespondence = await this.findOne({
+  ): Promise<Correspondence[] | null> {
+    const findCorrespondence = await this.find({
       where: { recipient_name: Like(`%${name}%`) },
     });
 
