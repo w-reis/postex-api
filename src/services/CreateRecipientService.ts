@@ -45,6 +45,7 @@ class CreateRecipientService {
 
     const recipient = recipientsRepository.create({
       name,
+      email,
       password: hashedPassword,
       address,
       number,
