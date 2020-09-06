@@ -4,11 +4,11 @@ import { getCustomRepository } from 'typeorm';
 import CreateCorrespondenceService from '../services/CreateCorrespondenceService';
 import CorrespondencesRepository from '../repositories/CorrespondencesRepository';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureUserAuthenticated from '../middlewares/ensureUserAuthenticated';
 
 const correspondencesRouter = Router();
 
-correspondencesRouter.use(ensureAuthenticated);
+correspondencesRouter.use(ensureUserAuthenticated);
 
 correspondencesRouter.get('/', async (request, response) => {
   const correspondencesRepository = getCustomRepository(
