@@ -35,9 +35,9 @@ class AuthenticateUserService {
       throw new AppError('Incorrect username/password combination.', 401);
     }
 
-    const { secret, expiresIn } = authConfig.jwt;
+    const { user_secret, expiresIn } = authConfig.jwt;
 
-    const token = sign({}, secret, {
+    const token = sign({}, user_secret, {
       subject: user.id.toString(),
       expiresIn,
     });
