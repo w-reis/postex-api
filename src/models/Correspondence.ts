@@ -22,7 +22,7 @@ class Correspondence {
   recipient_id: number;
 
   @ManyToOne(() => Recipient)
-  @JoinColumn({ name: 'recipient_id ' })
+  @JoinColumn({ name: 'recipient_id' })
   recipient: Recipient;
 
   @Column()
