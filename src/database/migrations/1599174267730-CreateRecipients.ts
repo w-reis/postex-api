@@ -24,7 +24,7 @@ export default class CreateRecipients1599174267730
           {
             name: 'email',
             type: 'varchar',
-            isNullable: true,
+            isNullable: false,
             isUnique: true,
           },
           {
