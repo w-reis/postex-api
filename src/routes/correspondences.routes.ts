@@ -5,6 +5,7 @@ import CreateCorrespondenceService from '../services/CreateCorrespondenceService
 import CorrespondencesRepository from '../repositories/CorrespondencesRepository';
 
 import ensureUserAuthenticated from '../middlewares/ensureUserAuthenticated';
+import UpdateCorrespondenceService from '../services/UpdateCorrespondenceService';
 
 const correspondencesRouter = Router();
 
@@ -32,6 +33,22 @@ correspondencesRouter.post('/', async (request, response) => {
   });
 
   return response.sendStatus(200);
+});
+
+correspondencesRouter.put('/:id', async (request, response) => {
+  const { recipient_name, recipient_id, object_number } = request.body;
+  const { id } = request.params;
+
+  const updateCorrespondence = new UpdateCorrespondenceService();
+
+  const correspondence = await updateCorrespondence.execute({
+    id,
+    recipient_name,
+    recipient_id,
+    object_number,
+  });
+
+  return response.json(correspondence);
 });
 
 export default correspondencesRouter;
