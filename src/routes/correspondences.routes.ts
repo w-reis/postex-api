@@ -24,14 +24,14 @@ correspondencesRouter.post('/', async (request, response) => {
 
   const createCorrespondence = new CreateCorrespondenceService();
 
-  const correspondence = await createCorrespondence.execute({
+  await createCorrespondence.execute({
     recipient_name,
     recipient_id,
     object_number,
     status: 'pendente',
   });
 
-  return response.json(correspondence);
+  return response.sendStatus(200);
 });
 
 export default correspondencesRouter;

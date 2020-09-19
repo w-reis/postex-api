@@ -1,5 +1,4 @@
 import { getCustomRepository } from 'typeorm';
-import Correspondence from '../models/Correspondence';
 import CorrespondencesRepository from '../repositories/CorrespondencesRepository';
 
 interface Request {
@@ -15,7 +14,7 @@ class CreateCorrespondenceService {
     recipient_id,
     object_number,
     status,
-  }: Request): Promise<Correspondence> {
+  }: Request): Promise<void> {
     const correspondencesRepository = getCustomRepository(
       CorrespondencesRepository
     );
@@ -27,8 +26,6 @@ class CreateCorrespondenceService {
     });
 
     await correspondencesRepository.save(correspondence);
-
-    return correspondence;
   }
 }
 
