@@ -1,6 +1,8 @@
 import { EntityRepository, Repository, Like } from 'typeorm';
 import Correspondence from '../models/Correspondence';
 
+import AppError from '../errors/AppError';
+
 @EntityRepository(Correspondence)
 class CorrespondencesRepository extends Repository<Correspondence> {
   public async findByRecipientName(
@@ -11,6 +13,16 @@ class CorrespondencesRepository extends Repository<Correspondence> {
     });
 
     return findCorrespondence || null;
+  }
+
+  public async showCorrespondence(id: string): Promise<Correspondence> {
+    const correspondence = await this.findOne(id);
+
+    if (!correspondence) {
+      throw new AppError('Correspondence not found.', 404);
+    }
+
+    return correspondence;
   }
 }
 

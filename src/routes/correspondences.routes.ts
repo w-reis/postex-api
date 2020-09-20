@@ -20,6 +20,16 @@ correspondencesRouter.get('/', async (request, response) => {
   return response.json(correspondences);
 });
 
+correspondencesRouter.get('/:id', async (request, response) => {
+  const { id } = request.params;
+  const correspondencesRepository = getCustomRepository(
+    CorrespondencesRepository
+  );
+  const correspondence = await correspondencesRepository.showCorrespondence(id);
+
+  return response.json(correspondence);
+});
+
 correspondencesRouter.post('/', async (request, response) => {
   const { recipient_name, recipient_id, object_number } = request.body;
 
