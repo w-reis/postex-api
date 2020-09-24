@@ -1,8 +1,8 @@
 import { getCustomRepository } from 'typeorm';
-import Correspondence from '../models/Correspondence';
-import CorrespondencesRepository from '../repositories/CorrespondencesRepository';
+import Correspondence from '../../models/Correspondence';
+import CorrespondencesRepository from '../../repositories/CorrespondencesRepository';
 
-import AppError from '../errors/AppError';
+import AppError from '../../errors/AppError';
 
 interface Request {
   id: string;

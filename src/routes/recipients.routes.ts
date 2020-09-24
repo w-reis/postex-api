@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import CreateRecipientService from '../services/CreateRecipientService';
+import CreateRecipientService from '../services/recipient/CreateRecipientService';
 
 const recipientsRouter = Router();
 

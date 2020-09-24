@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 
-import CreateCorrespondenceService from '../services/CreateCorrespondenceService';
+import CreateCorrespondenceService from '../services/correspondence/CreateCorrespondenceService';
 import CorrespondencesRepository from '../repositories/CorrespondencesRepository';
 
 import ensureUserAuthenticated from '../middlewares/ensureUserAuthenticated';
-import UpdateCorrespondenceService from '../services/UpdateCorrespondenceService';
+import UpdateCorrespondenceService from '../services/correspondence/UpdateCorrespondenceService';
 
 const correspondencesRouter = Router();
 

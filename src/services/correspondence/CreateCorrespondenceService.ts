@@ -1,5 +1,5 @@
 import { getCustomRepository } from 'typeorm';
-import CorrespondencesRepository from '../repositories/CorrespondencesRepository';
+import CorrespondencesRepository from '../../repositories/CorrespondencesRepository';
 
 interface Request {
   recipient_name: string;
