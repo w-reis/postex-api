@@ -61,4 +61,14 @@ correspondencesRouter.put('/:id', async (request, response) => {
   return response.json(correspondence);
 });
 
+correspondencesRouter.delete('/:id', async (request, response) => {
+  const { id } = request.params;
+  const correspondencesRepository = getCustomRepository(
+    CorrespondencesRepository
+  );
+
+  await correspondencesRepository.deleteCorrespondence(id);
+  return response.sendStatus(200);
+});
+
 export default correspondencesRouter;

@@ -24,6 +24,10 @@ class CorrespondencesRepository extends Repository<Correspondence> {
 
     return correspondence;
   }
+
+  public async deleteCorrespondence(id: string): Promise<void> {
+    await this.delete(id);
+  }
 }
 
 export default CorrespondencesRepository;
