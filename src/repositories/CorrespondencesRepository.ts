@@ -6,7 +6,7 @@ import AppError from '../errors/AppError';
 @EntityRepository(Correspondence)
 class CorrespondencesRepository extends Repository<Correspondence> {
   public async findByRecipientName(
-    name: string
+    name: string | undefined
   ): Promise<Correspondence[] | null> {
     const findCorrespondence = await this.find({
       where: { recipient_name: Like(`%${name}%`) },

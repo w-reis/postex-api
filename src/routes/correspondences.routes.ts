@@ -12,10 +12,18 @@ const correspondencesRouter = Router();
 correspondencesRouter.use(ensureUserAuthenticated);
 
 correspondencesRouter.get('/', async (request, response) => {
+  const { query } = request.query;
   const correspondencesRepository = getCustomRepository(
     CorrespondencesRepository
   );
-  const correspondences = await correspondencesRepository.find();
+
+  if (!query) {
+    const correspondences = await correspondencesRepository.find();
+    return response.json(correspondences);
+  }
+  const correspondences = await correspondencesRepository.findByRecipientName(
+    query?.toString()
+  );
 
   return response.json(correspondences);
 });
@@ -26,6 +34,20 @@ correspondencesRouter.get('/:id', async (request, response) => {
     CorrespondencesRepository
   );
   const correspondence = await correspondencesRepository.showCorrespondence(id);
+
+  return response.json(correspondence);
+});
+
+correspondencesRouter.get('/', async (request, response) => {
+  const { query } = request.query;
+
+  const correspondencesRepository = getCustomRepository(
+    CorrespondencesRepository
+  );
+
+  const correspondence = await correspondencesRepository.findByRecipientName(
+    query?.toString()
+  );
 
   return response.json(correspondence);
 });
