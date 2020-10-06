@@ -32,7 +32,7 @@ class CorrespondencesRepository extends Repository<Correspondence> {
     return correspondence;
   }
 
-  public async deleteCorrespondence(ids: string[] | number): Promise<void> {
+  public async deleteCorrespondence(ids: string[]): Promise<void> {
     await this.delete(ids);
   }
 }

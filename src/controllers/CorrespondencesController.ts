@@ -44,12 +44,12 @@ export default class CorrespondencesController {
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    const { idGroup }: { idGroup: string[] } = request.query;
+    const { idGroup } = request.query;
     const correspondencesRepository = getCustomRepository(
       CorrespondencesRepository
     );
 
-    await correspondencesRepository.deleteCorrespondence(idGroup);
+    await correspondencesRepository.deleteCorrespondence(idGroup as string[]);
     return response.sendStatus(200);
   }
 
