@@ -4,29 +4,22 @@ import { getCustomRepository } from 'typeorm';
 import CreateCorrespondenceService from '../services/correspondence/CreateCorrespondenceService';
 import CorrespondencesRepository from '../repositories/CorrespondencesRepository';
 
+import paginateCorrespondenceResult from '../middlewares/paginateCorrespondencesResult';
 import ensureUserAuthenticated from '../middlewares/ensureUserAuthenticated';
 import UpdateCorrespondenceService from '../services/correspondence/UpdateCorrespondenceService';
+import DeliverCorrespondenceService from '../services/correspondence/DeliveCorrespondenceService';
 
 const correspondencesRouter = Router();
 
 correspondencesRouter.use(ensureUserAuthenticated);
 
-correspondencesRouter.get('/', async (request, response) => {
-  const { query } = request.query;
-  const correspondencesRepository = getCustomRepository(
-    CorrespondencesRepository
-  );
-
-  if (!query) {
-    const correspondences = await correspondencesRepository.find();
-    return response.json(correspondences);
+correspondencesRouter.get(
+  '/',
+  paginateCorrespondenceResult,
+  async (request, response) => {
+    return response.json(response.paginatedResults);
   }
-  const correspondences = await correspondencesRepository.findByRecipientName(
-    query?.toString()
-  );
-
-  return response.json(correspondences);
-});
+);
 
 correspondencesRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
@@ -34,20 +27,6 @@ correspondencesRouter.get('/:id', async (request, response) => {
     CorrespondencesRepository
   );
   const correspondence = await correspondencesRepository.showCorrespondence(id);
-
-  return response.json(correspondence);
-});
-
-correspondencesRouter.get('/', async (request, response) => {
-  const { query } = request.query;
-
-  const correspondencesRepository = getCustomRepository(
-    CorrespondencesRepository
-  );
-
-  const correspondence = await correspondencesRepository.findByRecipientName(
-    query?.toString()
-  );
 
   return response.json(correspondence);
 });
@@ -83,13 +62,25 @@ correspondencesRouter.put('/:id', async (request, response) => {
   return response.json(correspondence);
 });
 
-correspondencesRouter.delete('/:id', async (request, response) => {
+correspondencesRouter.patch('/:id', async (request, response) => {
   const { id } = request.params;
+
+  const deliverCorrespondence = new DeliverCorrespondenceService();
+
+  const correspondence = await deliverCorrespondence.execute({
+    id,
+  });
+
+  return response.json(correspondence);
+});
+
+correspondencesRouter.delete('/', async (request, response) => {
+  const { idGroup }: { idGroup: string[] } = request.query;
   const correspondencesRepository = getCustomRepository(
     CorrespondencesRepository
   );
 
-  await correspondencesRepository.deleteCorrespondence(id);
+  await correspondencesRepository.deleteCorrespondence(idGroup);
   return response.sendStatus(200);
 });
 

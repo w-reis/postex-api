@@ -1,4 +1,6 @@
 declare namespace Express {
+  import { Paginate } from '../middlewares/paginateResults';
+
   export interface Request {
     user: {
       id: number;
@@ -6,5 +8,9 @@ declare namespace Express {
     recipient: {
       id: number;
     };
+  }
+
+  export interface Response {
+    paginatedResults: Paginate;
   }
 }

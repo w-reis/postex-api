@@ -6,13 +6,20 @@ import AppError from '../errors/AppError';
 @EntityRepository(Correspondence)
 class CorrespondencesRepository extends Repository<Correspondence> {
   public async findByRecipientName(
-    name: string | undefined
-  ): Promise<Correspondence[] | null> {
-    const findCorrespondence = await this.find({
+    name: string | undefined,
+    take: number,
+    skip: number
+  ): Promise<[Correspondence[], number]> {
+    const [findCorrespondence, total] = await this.findAndCount({
+      order: {
+        created_at: 'DESC',
+      },
       where: { recipient_name: Like(`%${name}%`) },
+      take,
+      skip,
     });
 
-    return findCorrespondence || null;
+    return [findCorrespondence, total];
   }
 
   public async showCorrespondence(id: string): Promise<Correspondence> {
@@ -25,8 +32,8 @@ class CorrespondencesRepository extends Repository<Correspondence> {
     return correspondence;
   }
 
-  public async deleteCorrespondence(id: string): Promise<void> {
-    await this.delete(id);
+  public async deleteCorrespondence(ids: string[] | number): Promise<void> {
+    await this.delete(ids);
   }
 }
 
