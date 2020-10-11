@@ -14,4 +14,6 @@ usersRouter.get('/', paginateUserResult, usersController.index);
 
 usersRouter.post('/', usersController.create);
 
+usersRouter.put('/:id', usersController.update);
+
 export default usersRouter;
