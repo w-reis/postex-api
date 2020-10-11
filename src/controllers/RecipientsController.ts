@@ -7,13 +7,12 @@ import CreateRecipientService from '../services/recipient/CreateRecipientService
 
 export default class RecipientsController {
   public async index(request: Request, response: Response): Promise<Response> {
+    const { recipient } = request.query;
     const recipientsRepository = getCustomRepository(RecipientsRepository);
 
-    const recipients = await recipientsRepository.find({
-      order: {
-        created_at: 'DESC',
-      },
-    });
+    const recipients = await recipientsRepository.findByRecipientName(
+      recipient?.toString()
+    );
 
     return response.json(recipients);
   }
