@@ -43,4 +43,12 @@ export default class UsersController {
 
     return response.json(user);
   }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { idGroup } = request.query;
+    const usersRepository = getCustomRepository(UsersRepository);
+
+    await usersRepository.deleteUser(idGroup as string[]);
+    return response.sendStatus(200);
+  }
 }
