@@ -6,20 +6,16 @@ import AppError from '../errors/AppError';
 @EntityRepository(Recipient)
 class RecipientsRepository extends Repository<Recipient> {
   public async findByRecipientName(
-    name: string | undefined,
-    take: number,
-    skip: number
-  ): Promise<[Recipient[], number]> {
-    const [findRecipient, total] = await this.findAndCount({
+    name: string | undefined
+  ): Promise<Recipient[]> {
+    const findRecipient = await this.find({
       order: {
         created_at: 'DESC',
       },
       where: { name: Like(`%${name}%`) },
-      take,
-      skip,
     });
 
-    return [findRecipient, total];
+    return findRecipient;
   }
 
   public async showRecipient(id: string): Promise<Recipient> {
