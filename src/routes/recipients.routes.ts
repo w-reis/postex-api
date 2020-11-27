@@ -7,9 +7,7 @@ const recipientsRouter = Router();
 
 const recipientsController = new RecipientsController();
 
-recipientsRouter.use(ensureUserAuthenticated);
-
-recipientsRouter.get('/', recipientsController.index);
+recipientsRouter.get('/', ensureUserAuthenticated, recipientsController.index);
 
 recipientsRouter.post('/', recipientsController.create);
 

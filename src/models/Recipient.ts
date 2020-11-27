@@ -17,7 +17,7 @@ class Recipient {
   @Column()
   email: string;
 
-  @Column({ select: false })
+  @Column()
   password: string;
 
   @Column()
