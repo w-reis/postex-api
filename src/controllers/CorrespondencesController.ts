@@ -79,4 +79,16 @@ export default class CorrespondencesController {
 
     return response.json(correspondence);
   }
+
+  public async count(request: Request, response: Response): Promise<Response> {
+    const { id } = request.query;
+    const correspondencesRepository = getCustomRepository(
+      CorrespondencesRepository
+    );
+    const correspondence = await correspondencesRepository.countCorrespondence(
+      id?.toString()
+    );
+
+    return response.json(correspondence);
+  }
 }

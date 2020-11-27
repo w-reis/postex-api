@@ -2,11 +2,18 @@ import { Router } from 'express';
 
 import paginateCorrespondenceResult from '../middlewares/paginateCorrespondencesResult';
 import ensureUserAuthenticated from '../middlewares/ensureUserAuthenticated';
+import ensureRecipientAuthenticated from '../middlewares/ensureRecipientAuthenticated';
 import CorrespondencesController from '../controllers/CorrespondencesController';
 
 const correspondencesRouter = Router();
 
 const correspondencesController = new CorrespondencesController();
+
+correspondencesRouter.get(
+  '/count',
+  ensureRecipientAuthenticated,
+  correspondencesController.count
+);
 
 correspondencesRouter.use(ensureUserAuthenticated);
 
