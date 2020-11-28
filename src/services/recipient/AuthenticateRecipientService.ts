@@ -35,7 +35,7 @@ class AuthenticateRecipientService {
       throw new AppError('Incorrect email/password combination.', 401);
     }
 
-    const { recipient_secret, expiresIn } = authConfig.jwt;
+    const { recipient_secret, expiresIn }: any = authConfig.jwt;
 
     const token = sign({}, recipient_secret, {
       subject: recipient.id.toString(),

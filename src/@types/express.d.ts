@@ -1,5 +1,5 @@
 declare namespace Express {
-  import { Paginate } from '../middlewares/paginateResults';
+  import { Paginate } from '../middlewares/paginateUsersResult';
 
   export interface Request {
     user: {

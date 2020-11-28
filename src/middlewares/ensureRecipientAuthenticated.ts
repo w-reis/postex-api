@@ -25,7 +25,8 @@ export default function ensureRecipientAuthenticated(
   const [, token] = authHeader.split(' ');
 
   try {
-    const decoded = verify(token, authConfig.jwt.recipient_secret);
+    const secret: any = authConfig.jwt.recipient_secret;
+    const decoded = verify(token, secret);
 
     const { sub } = decoded as TokenPayload;
 

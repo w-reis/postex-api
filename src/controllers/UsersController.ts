@@ -16,7 +16,7 @@ export default class UsersController {
 
     const createUser = new CreateUserService();
 
-    const user = await createUser.excute({
+    const user: any = await createUser.excute({
       username,
       password,
       role,
@@ -33,7 +33,7 @@ export default class UsersController {
 
     const updateUser = new UpdateUserService();
 
-    const user = await updateUser.execute({
+    const user: any = await updateUser.execute({
       id,
       username,
       role,
@@ -55,7 +55,7 @@ export default class UsersController {
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const usersRepository = getCustomRepository(UsersRepository);
-    const user = await usersRepository.showUser(id);
+    const user: any = await usersRepository.showUser(id);
 
     delete user.password;
 
