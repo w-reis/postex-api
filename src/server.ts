@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+import dotenv from 'dotenv';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
@@ -7,6 +8,8 @@ import routes from './routes';
 import AppError from './errors/AppError';
 
 import './database';
+
+dotenv.config();
 
 const app = express();
 
@@ -27,6 +30,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-app.listen(3333, () => {
+app.listen(process.env.PORT || 3333, () => {
   console.log('🚀️ Server started on port 3333!');
 });
