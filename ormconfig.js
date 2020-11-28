@@ -1,5 +1,3 @@
-console.log('USUÁRIO =>', process.env.DB_USERNAME)
-
 module.exports = {
   "type": "postgres",
   //"url:": process.env.DATABASE_URL,
