@@ -66,24 +66,41 @@ class CorrespondencesRepository extends Repository<Correspondence> {
       take: 1,
     });
 
-    const result = {
+    if (lastTotal[0] && lastPending[0] && lasRetired[0]) {
+      return {
+        all: {
+          total,
+          last: getFormattedDate(lastTotal[0]?.created_at),
+        },
+
+        pending: {
+          total: pending,
+          last: getFormattedDate(lastPending[0]?.created_at),
+        },
+
+        retired: {
+          total: retired,
+          last: getFormattedDate(lasRetired[0]?.created_at),
+        },
+      };
+    }
+
+    return {
       all: {
         total,
-        last: getFormattedDate(lastTotal[0].created_at),
+        last: '',
       },
 
       pending: {
         total: pending,
-        last: getFormattedDate(lastPending[0].created_at),
+        last: '',
       },
 
       retired: {
         total: retired,
-        last: getFormattedDate(lasRetired[0].created_at),
+        last: '',
       },
     };
-
-    return result;
   }
 }
 
