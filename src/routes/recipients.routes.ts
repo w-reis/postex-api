@@ -9,6 +9,8 @@ const recipientsController = new RecipientsController();
 
 recipientsRouter.get('/', ensureUserAuthenticated, recipientsController.index);
 
+recipientsRouter.get('/:id', recipientsController.show);
+
 recipientsRouter.post('/', recipientsController.create);
 
 export default recipientsRouter;

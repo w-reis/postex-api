@@ -50,4 +50,12 @@ export default class RecipientsController {
 
     return response.json(recipient);
   }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const recipientsRepository = getCustomRepository(RecipientsRepository);
+    const correspondence = await recipientsRepository.showRecipient(id);
+
+    return response.json(correspondence);
+  }
 }
