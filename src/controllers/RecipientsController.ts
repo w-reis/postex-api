@@ -4,6 +4,7 @@ import { getCustomRepository } from 'typeorm';
 import RecipientsRepository from '../repositories/RecipientsRepository';
 
 import CreateRecipientService from '../services/recipient/CreateRecipientService';
+import UpdateRecipientService from '../services/recipient/UpdateRecipientService';
 
 export default class RecipientsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -44,6 +45,36 @@ export default class RecipientsController {
       city,
       state,
       CEP,
+    });
+
+    delete recipient.password;
+
+    return response.json(recipient);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const {
+      CEP,
+      address,
+      number,
+      complement,
+      neighborhood,
+      city,
+      state,
+    } = request.body;
+    const { id } = request.params;
+
+    const updateRecipient = new UpdateRecipientService();
+
+    const recipient: any = await updateRecipient.execute({
+      id,
+      CEP,
+      address,
+      number,
+      complement,
+      neighborhood,
+      city,
+      state,
     });
 
     delete recipient.password;
