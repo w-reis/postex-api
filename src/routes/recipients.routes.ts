@@ -15,4 +15,8 @@ recipientsRouter.get('/', recipientsController.index);
 
 recipientsRouter.get('/:id', recipientsController.show);
 
+recipientsRouter.put('/:id', recipientsController.update);
+
+recipientsRouter.delete('/', recipientsController.delete);
+
 export default recipientsRouter;
