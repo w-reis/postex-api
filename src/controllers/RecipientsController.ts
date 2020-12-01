@@ -54,8 +54,10 @@ export default class RecipientsController {
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const recipientsRepository = getCustomRepository(RecipientsRepository);
-    const correspondence = await recipientsRepository.showRecipient(id);
+    const recipient = await recipientsRepository.showRecipient(id);
 
-    return response.json(correspondence);
+    delete recipient.password;
+
+    return response.json(recipient);
   }
 }
