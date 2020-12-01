@@ -82,6 +82,14 @@ export default class RecipientsController {
     return response.json(recipient);
   }
 
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.query;
+    const recipientsRepository = getCustomRepository(RecipientsRepository);
+
+    await recipientsRepository.deleteRecipient(id as string);
+    return response.sendStatus(200);
+  }
+
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const recipientsRepository = getCustomRepository(RecipientsRepository);

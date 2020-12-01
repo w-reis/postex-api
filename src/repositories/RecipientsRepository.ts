@@ -28,8 +28,8 @@ class RecipientsRepository extends Repository<Recipient> {
     return recipient;
   }
 
-  public async deleteRecipient(ids: string[]): Promise<void> {
-    await this.delete(ids);
+  public async deleteRecipient(id: string): Promise<void> {
+    await this.delete(id);
   }
 }
 
