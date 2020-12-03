@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import RecipientsController from '../controllers/RecipientsController';
 import ensureRecipientAuthenticated from '../middlewares/ensureRecipientAuthenticated';
+import ensureUserAuthenticated from '../middlewares/ensureUserAuthenticated';
 
 const recipientsRouter = Router();
 
@@ -9,9 +10,9 @@ const recipientsController = new RecipientsController();
 
 recipientsRouter.post('/', recipientsController.create);
 
-recipientsRouter.use(ensureRecipientAuthenticated);
+recipientsRouter.get('/', ensureUserAuthenticated, recipientsController.index);
 
-recipientsRouter.get('/', recipientsController.index);
+recipientsRouter.use(ensureRecipientAuthenticated);
 
 recipientsRouter.get('/:id', recipientsController.show);
 
