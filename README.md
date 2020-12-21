@@ -64,9 +64,11 @@ $ yarn
 <p>Antes de dar start no servidor, abra o arquivo ".env.example" localizado na raiz do projeto e preencha com as credenciais do seu banco de dados Postgres.</p>
 <p> Adicione também as "secrets" que serão utilizadas na autenticação via JWT(Json Web Token). </p>
 <p> Salve e renomeie o arquivo para ".env" </p>
-Feito isso, inicie o servidor:
+<p>Feito isso, execute as migrations e inicie o servidor:</p>
 
 ```bash
+#Execute as migrations
+$ yarn typeorm migration:run
 #Execute a aplicação
 $ yarn dev:server
 ```
