@@ -69,6 +69,7 @@ $ yarn
 ```bash
 #Execute as migrations
 $ yarn typeorm migration:run
+
 #Execute a aplicação
 $ yarn dev:server
 ```
